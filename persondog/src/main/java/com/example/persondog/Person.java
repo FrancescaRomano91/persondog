@@ -1,10 +1,11 @@
 package com.example.persondog;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import lombok.*;
+import jakarta.persistence.*;
 
 import java.util.ArrayList;
+
+import lombok.*;
+
 import java.util.List;
 import java.util.UUID;
 
@@ -21,5 +22,10 @@ public class Person {
     private String id;
     private String name;
     private int age;
+
+    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @Builder.Default
+    @ToString.Exclude
+    private List<Custody> custodies = new ArrayList<>();
 
 }
